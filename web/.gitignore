@@ -1,0 +1,15 @@
+# OSX
+#
+.DS_Store
+
+# node.js
+#
+node_modules/
+
+# next.js
+#
+.next
+
+# idea
+.idea
+build

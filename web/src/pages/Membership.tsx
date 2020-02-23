@@ -1,9 +1,11 @@
 import React from 'react';
+import { url } from 'inspector';
+import membership1 from '../img/login/membership1.png'
 
 const Membership = () => {
   return (
-    <div>
-      <h2>1212312123123</h2>
+    <div style={{backgroundImage:'url(require("../img/login/membership1.png"))'}}>
+      {/* <img src={require('../img/login/membership1.png')} /> */}
     </div>
   );
 };

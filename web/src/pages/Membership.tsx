@@ -1,11 +1,15 @@
 import React from 'react';
-import { url } from 'inspector';
-// import membership1 from '../img/login/membership1.png'
-import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
+import { Grid } from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
-  formControl: {
+  main: {
+    width:"935px",
+    height:"817px",
+    paddingBottom:"44px",
+    margin:"30px auto 0"
+  },
+  phone: {
     alignSelf: 'center',
     backgroundImage: 'url("/images/membership1.png")',
     backgroundColor: "transparent",
@@ -14,9 +18,59 @@ const useStyles = makeStyles(theme => ({
     flexBasis: "454px",
     height: "618px",
     width: "454px",
-    marginLeft:"-35px",
-    marginRight: "-15px",
-    color: "white"
+    color: "white",
+    margin: "0 -15px 0 -35px"
+  },
+  subImage: {
+    width: "240px",
+    height: "427px",
+    marginLeft: "150px",
+    marginTop: "100px"
+  },
+  member: {
+    width:"350px",
+    height:"761px",
+    marginTop: "12px"
+  },
+  memberMain: {
+    border: "1px solid #dbdbdb",
+    borderRadius: '1px',
+    backgroundColor: "white",
+    padding: "10px 0",
+    margin: "0 0 10px",
+    width: "350px",
+    height: "564px"
+  },
+  memberSub: {
+    border: "1px solid #dbdbdb",
+    borderRadius: '1px',
+    backgroundColor: "white",
+    padding: "10px 0",
+    margin: "0 0 10px",
+    width: "350px",
+    height: "70px",
+  },
+  memberSub2: {
+    color: "black",
+    fontSize: "14px",
+    lineHeight: "18px",
+    margin: "10px 20px 10px 20px",
+    textAlign: "center",
+    width: "310px",
+    height: "18px"
+  },
+  memberLogo: {
+    width: "175px",
+    height: "51px",
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "-98px 0",
+    display: "block",
+    overflow: "hidden",
+    textIndent: "110%",
+    whiteSpace: "nowrap",
+    fontFamily: "-apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif",
+    margin: "22px auto 12px",
+    backgroundImage: 'url("/images/logo.png")',
   }
 }));
 
@@ -24,14 +78,26 @@ const Membership = () => {
   const classes = useStyles();
 
   return (
-    <div className="main">
-      <div style={{justifyContent:"center", marginTop:"30px", marginBottom:"auto", marginLeft:"auto", marginRight:"0px", maxWidth:"935px", paddingBottom:"44px", width:"100%"}} >
-        <div className={classes.formControl}>
-          {/* <img src={require('../img/login/membership1.png')} /> */}
-          123
-        </div>
+    <body style={{backgroundColor:"#FAFAFA"}}>
+      <div className="body">
+        <Grid container spacing={1} className={classes.main} >
+            <div className={classes.phone}>
+               <img src="/images/sub1.jpg" className={classes.subImage} />
+            </div>
+            <div className={classes.member}>
+              <div className={classes.memberMain}>
+                <h1 className={classes.memberLogo}>
+                  Instagram
+                </h1>
+              </div>
+              <div className={classes.memberSub}></div>
+              <div>
+                <div className={classes.memberSub2}>앱을 다운로드하세요.</div>
+              </div>
+            </div>
+        </Grid>
       </div>
-    </div>
+    </body>
   );
 };
 

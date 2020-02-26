@@ -1,0 +1,104 @@
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import { Grid } from "@material-ui/core";
+
+const useStyles = makeStyles(theme => ({
+  main: {
+    width:"935px",
+    height:"817px",
+    paddingBottom:"44px",
+    margin:"30px auto 0"
+  },
+  phone: {
+    alignSelf: 'center',
+    backgroundImage: 'url("/images/membership1.png")',
+    backgroundColor: "transparent",
+    backgroundPosition: "0 0",
+    backgroundSize: "454px 618px",
+    flexBasis: "454px",
+    height: "618px",
+    width: "454px",
+    color: "white",
+    margin: "0 -15px 0 -35px"
+  },
+  subImage: {
+    width: "240px",
+    height: "427px",
+    marginLeft: "150px",
+    marginTop: "100px"
+  },
+  member: {
+    width:"350px",
+    height:"761px",
+    marginTop: "12px"
+  },
+  memberMain: {
+    border: "1px solid #dbdbdb",
+    borderRadius: '1px',
+    backgroundColor: "white",
+    padding: "10px 0",
+    margin: "0 0 10px",
+    width: "350px",
+    height: "564px"
+  },
+  memberSub: {
+    border: "1px solid #dbdbdb",
+    borderRadius: '1px',
+    backgroundColor: "white",
+    padding: "10px 0",
+    margin: "0 0 10px",
+    width: "350px",
+    height: "70px",
+  },
+  memberSub2: {
+    color: "black",
+    fontSize: "14px",
+    lineHeight: "18px",
+    margin: "10px 20px 10px 20px",
+    textAlign: "center",
+    width: "310px",
+    height: "18px"
+  },
+  memberLogo: {
+    width: "175px",
+    height: "51px",
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "-98px 0",
+    display: "block",
+    overflow: "hidden",
+    textIndent: "110%",
+    whiteSpace: "nowrap",
+    fontFamily: "-apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif",
+    margin: "22px auto 12px",
+    backgroundImage: 'url("/images/logo.png")',
+  }
+}));
+
+const Membership = () => {
+  const classes = useStyles();
+
+  return (
+    <body style={{backgroundColor:"#FAFAFA"}}>
+      <div className="body">
+        <Grid container spacing={1} className={classes.main} >
+            <div className={classes.phone}>
+               {/*<img src="/images/sub1.jpg" className={classes.subImage} />*/}
+            </div>
+            <div className={classes.member}>
+              <div className={classes.memberMain}>
+                <h1 className={classes.memberLogo}>
+                  Instagram
+                </h1>
+              </div>
+              <div className={classes.memberSub}></div>
+              <div>
+                <div className={classes.memberSub2}>앱을 다운로드하세요.</div>
+              </div>
+            </div>
+        </Grid>
+      </div>
+    </body>
+  );
+};
+
+export default Membership;

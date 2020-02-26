@@ -82,7 +82,7 @@ const Membership = () => {
       <div className="body">
         <Grid container spacing={1} className={classes.main} >
             <div className={classes.phone}>
-               <img src="/images/sub1.jpg" className={classes.subImage} />
+               {/*<img src="/images/sub1.jpg" className={classes.subImage} />*/}
             </div>
             <div className={classes.member}>
               <div className={classes.memberMain}>

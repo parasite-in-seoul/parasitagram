@@ -1,5 +1,5 @@
-export { default as Home } from './Home';
-export { default as About } from './About';
-export { default as Post } from './Post';
-export { default as Posts } from './Posts';
+export { default as Home } from './example/Home';
+export { default as About } from './example/About';
+export { default as Post } from './example/Post';
+export { default as Posts } from './example/Posts';
 export { default as Membership } from './Membership';

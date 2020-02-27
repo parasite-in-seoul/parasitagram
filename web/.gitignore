@@ -6,8 +6,10 @@
 #
 node_modules/
 
-# next.js
-#
 
 # idea
 .idea
+
+
+#etc
+example/

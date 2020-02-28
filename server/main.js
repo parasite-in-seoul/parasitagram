@@ -11,7 +11,7 @@ app.use('/auth', auth);
 
 // 경로 '/' 로 들어오는 요청들은 public 폴더로 정적 라우팅합니다.
 app.use('/', express.static(__dirname + '/../web'));
-
+app.use('/', express.static('public'));
 
 app.get('/hello', function(req, res) {
     res.send('hello world');

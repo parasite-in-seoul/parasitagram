@@ -1,0 +1,32 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: 'Test API'
+  description: 'Test API'
+servers:
+  - description: Test API
+    url: http://localhost:3000/
+paths:
+  /api/user:
+    post:
+      summary: Sign up API
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      responses:
+        default:
+          description: successful operation
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        nickname:
+          type: string
+        userId:
+          type: string
+        password:
+          type: string

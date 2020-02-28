@@ -1,5 +1,9 @@
 const express= require('express');
 const app = express();
+const db = require('./models');
+
+db.sequelize.sync();
+
 
 const auth= require('./routes/auth');
 app.use('/auth', auth);

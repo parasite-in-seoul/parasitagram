@@ -8,4 +8,7 @@ router.post('/',
   postCtrl.upload.array('image'),  
   postCtrl.savePost);
 
+router.get('/:id', 
+  postCtrl.getPostById);
+
 module.exports = router;

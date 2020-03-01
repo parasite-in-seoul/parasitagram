@@ -5,17 +5,23 @@ info:
   description: 'Test API'
 servers:
   - description: Test API
+    url: http://13.209.6.153:3000/
+  - description: Local API
     url: http://localhost:3000/
 paths:
-  /api/user:
+  /api/post:
     post:
-      summary: Sign up API
       requestBody:
         content:
-          application/json:
+          multipart/form-data:
             schema:
-              $ref: '#/components/schemas/User'
-        required: true
+              type: object
+              properties:
+                content:
+                  type: string
+                image:
+                  type: string
+                  format: binary
       responses:
         default:
           description: successful operation

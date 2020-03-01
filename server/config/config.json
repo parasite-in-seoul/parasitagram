@@ -3,7 +3,7 @@
     "username": "parasite",
     "password": "parasitagram",
     "database": "parasitagram",
-    "host": "13.209.6.153",
+    "host": "127.0.0.1",
     "dialect": "mysql",
     "operatorsAliases": false
   },

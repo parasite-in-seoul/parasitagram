@@ -1,0 +1,53 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: 'Test API'
+  description: 'Test API'
+servers:
+  - description: Test API
+    url: http://13.209.6.153:3000/
+  - description: Local API
+    url: http://localhost:3000/
+paths:
+  /api/post:
+    post:
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                content:
+                  type: string
+                image:
+                  type: string
+                  format: binary
+      responses:
+        default:
+          description: successful operation
+  '/api/post/{postId}':
+    get:
+      summary: Find post by ID
+      description: Returns a single post
+      parameters:
+        - name: postId
+          in: path
+          description: ID of post to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        default:
+          description: successful operation
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        nickname:
+          type: string
+        userId:
+          type: string
+        password:
+          type: string

@@ -3,11 +3,11 @@ import 'react-native-gesture-handler';
 import React, { FC } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 
-import MainTabNavigator from './navigators/main-tab-navigator';
+import AuthorizedNavigator from './navigators/authorized-navigator';
 
 const App: FC = () => (
   <NavigationContainer>
-    <MainTabNavigator />
+    <AuthorizedNavigator />
   </NavigationContainer>
 );
 

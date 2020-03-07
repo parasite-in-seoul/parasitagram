@@ -1,4 +1,4 @@
-export type MainStackParamList = {
+export type MainTabNavigatorParamList = {
   Home: undefined;
-  Detail: { userId: number };
+  MyProfile: undefined;
 };

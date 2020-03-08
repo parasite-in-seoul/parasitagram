@@ -93,7 +93,7 @@ const AppLayout = () => {
         <Toolbar>
           <div className={classes.layout1}>
             <a href="/">
-              <img src="/images/logo.png" alt="instagramlogo" className={classes.logoButton}/>
+              <img src="/images/Instalogo.png" alt="instagramlogo" className={classes.logoButton}/>
             </a>
           </div>
           <div className={classes.layout2}>

@@ -5,28 +5,32 @@ import { FeedNavigatorParamList } from '../types/navigation';
 
 type FeedScreenNavigationProp = StackNavigationProp<
   FeedNavigatorParamList,
-  'Feeds'
+  'Posts'
 >;
 
 type Props = {
   navigation: FeedScreenNavigationProp;
 };
 
-const FeedScreen = ({ navigation: { navigate } }: Props) => {
+const PostsScreen = ({ navigation: { navigate } }: Props) => {
   return (
-    <View style={styles.feedScreenContainer}>
-      <Text>This is FeedScreen</Text>
+    <View style={styles.postsScreenContainer}>
+      <Text>This is PostsScreen</Text>
       <Button title="Go to UserScreen" onPress={() => navigate('User')} />
+      <Button
+        title="Go to CommentsScreen"
+        onPress={() => navigate('Comments')}
+      />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  feedScreenContainer: {
+  postsScreenContainer: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },
 });
 
-export default FeedScreen;
+export default PostsScreen;

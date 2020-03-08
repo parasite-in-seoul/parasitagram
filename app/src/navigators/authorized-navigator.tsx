@@ -8,7 +8,11 @@ const Stack = createStackNavigator<AuthorizedNavigatorParamList>();
 
 const AuthorizedNavigator: FC = () => (
   <Stack.Navigator>
-    <Stack.Screen name="Main" component={MainTabNavigator} />
+    <Stack.Screen
+      name="Main"
+      component={MainTabNavigator}
+      options={{ headerShown: false }}
+    />
   </Stack.Navigator>
 );
 

@@ -1,9 +1,17 @@
 export type AuthorizedNavigatorParamList = {
   Main: undefined;
-  Upload: undefined;
 };
 
 export type MainTabNavigatorParamList = {
-  Home: undefined;
+  Feed: FeedNavigatorParamList;
+  Upload: undefined;
   MyProfile: undefined;
+};
+
+export type FeedNavigatorParamList = {
+  Feeds: undefined;
+  User: undefined;
+  Posts: undefined;
+  Comments: undefined;
+  Direct: undefined;
 };

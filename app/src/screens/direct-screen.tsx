@@ -1,20 +1,20 @@
 import React, { FC } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-const UploadScreen: FC = () => {
+const DirectScreen: FC = () => {
   return (
-    <View style={styles.uploadScreenContainer}>
-      <Text>This is UploadScreen</Text>
+    <View style={styles.directScreenContainer}>
+      <Text>This is DirectScreen</Text>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  uploadScreenContainer: {
+  directScreenContainer: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },
 });
 
-export default UploadScreen;
+export default DirectScreen;

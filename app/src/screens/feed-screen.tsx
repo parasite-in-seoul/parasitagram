@@ -12,11 +12,14 @@ type Props = {
   navigation: FeedScreenNavigationProp;
 };
 
-const FeedScreen = ({ navigation: { navigate } }: Props) => {
+const FeedScreen = ({ navigation }: Props) => {
   return (
     <View style={styles.feedScreenContainer}>
       <Text>This is FeedScreen</Text>
-      <Button title="Go to UserScreen" onPress={() => navigate('User')} />
+      <Button
+        title="Go to UserScreen"
+        onPress={() => navigation.push('User')}
+      />
     </View>
   );
 };

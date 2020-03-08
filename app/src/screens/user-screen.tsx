@@ -12,12 +12,18 @@ type Props = {
   navigation: UserScreenNavigationProp;
 };
 
-const UserScreen = ({ navigation: { navigate } }: Props) => {
+const UserScreen = ({ navigation }: Props) => {
   return (
     <View style={styles.userScreenContainer}>
       <Text>This is UserScreen</Text>
-      <Button title="Go to PostsScreen" onPress={() => navigate('Posts')} />
-      <Button title="Go to DirectScreen" onPress={() => navigate('Direct')} />
+      <Button
+        title="Go to PostsScreen"
+        onPress={() => navigation.push('Posts')}
+      />
+      <Button
+        title="Go to DirectScreen"
+        onPress={() => navigation.push('Direct')}
+      />
     </View>
   );
 };

@@ -1,13 +1,13 @@
 import React from 'react';
 
-const Followings = () => {
+const Common = () => {
   return (
     <div>
       <h2>
-        Followings
+        Common
       </h2>
     </div>
   );
 };
 
-export default Followings;
+export default Common;

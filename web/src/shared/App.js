@@ -1,19 +1,17 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { Home, About, Posts, Membership } from '../pages';
-import Menu from '../components/Menu';
+import { Main, Posts, Membership } from '../pages';
 import AppLayout from '../components/AppLayout';
+import { hot } from "react-hot-loader";
+
 
 class App extends Component {
   render() {
     return (
       <div>
-        <Menu/>
-        <AppLayout/>
-        <Route exact path="/" component={Home}/>
+        <AppLayout />
+        <Route exact path="/" component={Main}/>
         <Switch>
-          <Route path="/about/:name" component={About}/>
-          <Route path="/about" component={About}/>
           <Route path="/membership" component={Membership}/>
         </Switch>
         <Route path="/posts" component={Posts}/>
@@ -22,4 +20,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default  hot(module)(App);

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, Route } from 'react-router-dom';
 import  Post  from './Post';
-
+//예시
 const Posts :  React.FC  = ({match}: any) => {
   return (
     <div>

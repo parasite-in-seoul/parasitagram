@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-const ProfileScreen = () => {
+const ProfileScreen: FC = () => {
   return (
     <View style={styles.profileScreenContainer}>
       <Text>This is ProfileScreen</Text>

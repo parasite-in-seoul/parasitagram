@@ -4,6 +4,8 @@ const db = require('./models');
 
 db.sequelize.sync();
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 const auth= require('./routes/auth');
 app.use('/auth', auth);
@@ -14,6 +16,8 @@ app.use('/', express.static('public'));
 app.use('/', express.static('uploads'));
 
 app.use('/api/post', require('./routes/post'));
+app.use('/api/posts', require('./routes/posts'));
+app.use('/api/hashtag', require('./routes/hashtag'));
 
 app.get('/hello', function(req, res) {
     res.send('hello world');

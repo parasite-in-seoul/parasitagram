@@ -1,7 +1,7 @@
-import React from 'react';
+import * as React from 'react';
 import { Link, Route } from 'react-router-dom';
 import  Post  from './Post';
-//예시
+// 예시
 const Posts :  React.FC  = ({match}: any) => {
   return (
     <div>
@@ -12,7 +12,7 @@ const Posts :  React.FC  = ({match}: any) => {
         <li><Link to={`${match.url}/3`}>Post #3</Link></li>
         <li><Link to={`${match.url}/4`}>Post #4</Link></li>
       </ul>
-      <Route exact path={match.url} render={()=>(<h3>Please select any post</h3>)}/>
+      {/*<Route exact={true} path={match.url} render={()=>(<h3>Please select any post</h3>)}/>*/}
       <Route path={`${match.url}/:id`} component={Post}/>
     </div>
   );

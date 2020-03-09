@@ -1,5 +1,5 @@
-import React from 'react';
-//예시
+import * as React from 'react';
+// 예시
 const Post = ({match}:any) => {
   return (
     <div>

@@ -1,4 +1,5 @@
-import React, { useEffect, useRef } from 'react';
+import * as React from 'react';
+import { useEffect, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
 import {AppBar} from '@material-ui/core/';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -97,7 +98,7 @@ const AppLayout = () => {
             </a>
           </div>
           <div className={classes.layout2}>
-            <form  noValidate autoComplete="off">
+            <form  noValidate={true} autoComplete="off">
               {/*<TextField className={classes.input} id="outlined-basic" variant="outlined" size="small" margin="dense"/>*/}
               <InputBase ref={inputOnFocus} className={classes.input} placeholder="검색" inputProps={{ 'aria-label': 'description' }} />
             </form>
@@ -118,7 +119,7 @@ const AppLayout = () => {
           </div>
         </Toolbar>
       </AppBar>
-      <div className={classes.appMargin}></div>
+      <div className={classes.appMargin}/>
 
     </>
   );

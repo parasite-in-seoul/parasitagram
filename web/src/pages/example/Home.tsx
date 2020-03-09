@@ -1,5 +1,5 @@
-import React from 'react';
-///예
+import * as React from 'react';
+/// 예시
 const Home = () => {
   return (
     <div>

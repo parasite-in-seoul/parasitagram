@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid } from "@material-ui/core";
 
@@ -151,7 +151,7 @@ const Membership = () => {
   return (
     <body style={{backgroundColor:"#FAFAFA"}}>
       <div className="body">
-        <Grid container spacing={1} className={classes.main} >
+        <Grid container={true} spacing={1} className={classes.main} >
             <div className={classes.phone}>
                {/*<img src="/images/sub1.jpg" className={classes.subImage} />*/}
             </div>
@@ -166,13 +166,13 @@ const Membership = () => {
                   </form>
                   <div className={classes.memberSub3_2}>
                     <button className={classes.memberSub3_2_1} type="button">
-                      <div className={classes.memberSub3_2_1_1}></div>
+                      <div className={classes.memberSub3_2_1_1}/>
                       Facebook으로 로그인
                     </button>
                   </div>
                 </div>
               </div>
-              <div className={classes.memberSub}></div>
+              <div className={classes.memberSub}/>
               <div>
                 <div className={classes.memberSub2}>앱을 다운로드하세요.</div>
               </div>

@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import Container from '@material-ui/core/Container';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -72,8 +72,7 @@ const Main = () => {
             <CardMedia
               src="/Users/Tanktwo_mac/Documents/GitHub/parasitagram/web/public/images/Content_Image.jpg"
               title="Paella dish"
-            >
-            </CardMedia>
+            />
           </Card>
           <img src="/images/Content_Image.jpg" alt="image1" className={classes.images}/>
         </Container>

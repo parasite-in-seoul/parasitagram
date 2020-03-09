@@ -1,4 +1,4 @@
-//예시
+// 예시
 
 const INCREASE = 'counter/INCREASE' as const;
 const DECREASE = 'counter/DECREASE' as const;

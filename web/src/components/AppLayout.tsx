@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },layout2:{
     textAlign: "center",
     height: "54px",
-    width: "100%",
+    width: "2900px",
 
   },layout3:{
     textAlign: "left",
@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginTop:"1.5%",
     background: "#FAFAFA",
     height: "20px",
-    width: "177px",
+    width: "200px",
     paddingBottom:"3px",
     paddingLeft:"26px",
     paddingRight:"10px",

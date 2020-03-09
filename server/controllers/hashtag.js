@@ -36,3 +36,32 @@ exports.getPostCountGroupByHashtag = async (req, res, next) => {
     next(e);
   }
 }
+
+exports.getPostListByHashtag = async (req, res, next) => {
+  try {
+    const posts = await db.Post.findAll({
+      include: [{
+        model: db.Hashtag,
+        where: { name: decodeURIComponent(req.params.tag) },
+      }, {
+        model: db.User,
+        attributes: ['id', 'nickName'],
+      }, {
+        model: db.Image,
+      }, {
+        model: db.User,
+        through: 'Like',
+        as: 'Likers',
+        attributes: ['id'],
+      }, {
+        model: db.Comment,
+      }
+      ],
+      order: [['createdAt', 'DESC']],
+    });
+    res.json(posts);
+  } catch (e) {
+    console.error(e);
+    next(e);
+  }
+}

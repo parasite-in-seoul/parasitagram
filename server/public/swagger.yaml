@@ -129,6 +129,20 @@ paths:
       responses:
         default:
           description: successful operation
+  '/api/hashtag/{tag}':
+    get:
+      summary: Find Post List by Hashtag
+      description: Returns a post list by hashtag
+      parameters:
+        - name: tag
+          in: path
+          description: tag
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: successful operation
 components:
   schemas:
     User:

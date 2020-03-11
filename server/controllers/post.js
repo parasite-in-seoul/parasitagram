@@ -77,3 +77,65 @@ exports.getPostById = async (req, res, next) => {
     next(e);
   }
 };
+
+exports.postComment = async (req, res, next) => { // POST /api/post/1000000/comment
+  try {
+    const post = await db.Post.findOne({ where: { id: req.params.id } });
+    if (!post) {
+      return res.status(404).send('포스트가 존재하지 않습니다.');
+    }
+    const newComment = await db.Comment.create({
+      PostId: post.id,
+      UserId: 1, //req.user.id
+      content: req.body.content,
+      CommentId: null,
+    });
+    await post.addComment(newComment.id);
+    const comment = await db.Comment.findOne({
+      where: {
+        id: newComment.id,
+      },
+      include: [{
+        model: db.User,
+        attributes: ['id', 'nickname'],
+      }],
+    });
+    return res.json(comment);
+  } catch (e) {
+    console.error(e);
+    return next(e);
+  }
+}
+
+exports.postChildComment = async (req, res, next) => { // POST /api/post/1000000/comment/child
+  try {
+    const parentComment = await db.Comment.findOne({ where: { id: req.params.id } });
+    if (!parentComment) {
+      return res.status(404).send('부모 댓글이 존재하지 않습니다.');
+    }
+    const post = await db.Post.findOne({ where: { id: parentComment.PostId } });
+    if (!post) {
+      return res.status(404).send('포스트가 존재하지 않습니다.');
+    }
+    const newComment = await db.Comment.create({
+      PostId: parentComment.PostId,
+      CommentId: parentComment.id,
+      UserId: 1, //req.user.id
+      content: req.body.content,
+    });
+    await post.addComment(newComment.id);
+    const comment = await db.Comment.findOne({
+      where: {
+        id: newComment.id,
+      },
+      include: [{
+        model: db.User,
+        attributes: ['id', 'nickname'],
+      }],
+    });
+    return res.json(comment);
+  } catch (e) {
+    console.error(e);
+    return next(e);
+  }
+}

@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', { // 테이블명은 users
-    nickname: {
+    nickName: {
       type: DataTypes.STRING(20), // 20글자 이하
       allowNull: false, // 필수
     },

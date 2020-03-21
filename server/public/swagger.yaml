@@ -141,6 +141,14 @@ paths:
           schema:
             type: string
       responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Post'
         default:
           description: successful operation
 components:
@@ -157,7 +165,7 @@ components:
     Post:
       type: object
       properties:
-        id:
+        postNumber:
           type: integer
           format: int64
         content:
@@ -168,23 +176,51 @@ components:
         updatedAt:
           type: string
           example: 'YYYY-MM-DDTHH:mm:ss.SSSZ'
-        UserId:
+        userNumber:
           type: integer
           format: int64
-        User:
-          type: object
-          properties:
-            id:
-              type: integer
-              format: int64
-            nickname:
-              type: string
-        Images:
+        likers:
+          type: array
+          items:
+            type: integer
+            format: int64
+        hashtags:
           type: array
           items:
             type: object
             properties:
-              id:
+              hashtagNumber:
+                type: integer
+                format: int64
+              name:
+                type: string     
+              createdAt:
+                type: string
+                example: 'YYYY-MM-DDTHH:mm:ss.SSSZ'
+              updatedAt:
+                type: string
+                example: 'YYYY-MM-DDTHH:mm:ss.SSSZ'
+              postHashtag:
+                type: object
+                properties:
+                  createdAt:
+                    type: string
+                    example: 'YYYY-MM-DDTHH:mm:ss.SSSZ'
+                  updatedAt:
+                    type: string
+                    example: 'YYYY-MM-DDTHH:mm:ss.SSSZ'
+                  hashtagId:
+                    type: integer
+                    format: int64
+                  postId:
+                    type: integer
+                    format: int64
+        images:
+          type: array
+          items:
+            type: object
+            properties:
+              imageNumber:
                 type: integer
                 format: int64
               src:
@@ -195,15 +231,12 @@ components:
               updatedAt:
                 type: string
                 example: 'YYYY-MM-DDTHH:mm:ss.SSSZ'
-              PostId:
-                type: integer
-                format: int64
-        Comments:
+        comments:
           type: array
           items:
             type: object
             properties:
-              id:
+              commentNumber:
                 type: integer
                 format: int64
               content:
@@ -214,12 +247,17 @@ components:
               updatedAt:
                 type: string
                 example: 'YYYY-MM-DDTHH:mm:ss.SSSZ'
-              UserId:
+              userId:
                 type: integer
                 format: int64
-              CommentId:
+              postId:
                 type: integer
                 format: int64
-              PostId:
+              parentId:
                 type: integer
                 format: int64
+              commentLikers:
+                type: array
+                items:
+                  type: integer
+                  format: int64

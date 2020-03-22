@@ -1,13 +1,21 @@
-import express from 'express';
-
+const express= require('express');
 const router = express.Router();
+const authCtrl = require('../../controllers/sys/auth');
 
-router.get('/', (req,res) => {
-    res.send('posts');
-});
+router.post('/signUp', 
+  authCtrl.signUp
+  );
 
-router.get('/read/:id', (req, res) => {
-    res.send('You are reading post ' + req.params.id);
-});
+router.post('/signIn',
+  authCtrl.signIn
+);
 
-export default router;
+router.get('/logOut',
+  authCtrl.logOut
+);
+
+router.get('/logInTest',
+  authCtrl.logInTest
+);
+
+module.exports = router;

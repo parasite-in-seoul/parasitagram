@@ -57,7 +57,7 @@ exports.savePost = async (req, res, next) => {
         attributes: [['id', 'imageNumber'], 'src', 'createdAt', 'updatedAt'],
       }, {
         model: db.Comment,
-        attributes: [['id', 'commentNumber'], 'content', 'createdAt', 'updatedAt', 'userId', 'postId', ['commentId', 'parentId']],
+        attributes: [['id', 'commentNumber'], 'content', 'createdAt', 'updatedAt', ['userId', 'userNumber'], ['postId', 'postNumber'], ['commentId', 'parentCommentNumber']],
         include: [
           {
             model: db.User,
@@ -92,7 +92,7 @@ exports.getPostById = async (req, res, next) => {
         attributes: [['id', 'imageNumber'], 'src', 'createdAt', 'updatedAt'],
       }, {
         model: db.Comment,
-        attributes: [['id', 'commentNumber'], 'content', 'createdAt', 'updatedAt', 'userId', 'postId', ['commentId', 'parentId']],
+        attributes: [['id', 'commentNumber'], 'content', 'createdAt', 'updatedAt', ['userId', 'userNumber'], ['postId', 'postNumber'], ['commentId', 'parentCommentNumber']],
         include: [
           {
             model: db.User,
@@ -127,7 +127,7 @@ exports.postComment = async (req, res, next) => { // POST /api/post/1000000/comm
       where: {
         id: newComment.id,
       },
-      attributes: [['id', 'commentNumber'], 'content', 'createdAt', 'updatedAt', 'userId', 'postId', ['commentId', 'parentId']],
+      attributes: [['id', 'commentNumber'], 'content', 'createdAt', 'updatedAt', ['userId', 'userNumber'], ['postId', 'postNumber'], ['commentId', 'parentCommentNumber']],
       include: [{
         model: db.User,
         attributes: [['id', 'userNumber'], 'userId', 'nickName'],
@@ -161,7 +161,7 @@ exports.postChildComment = async (req, res, next) => { // POST /api/post/1000000
       where: {
         id: newComment.id,
       },
-      attributes: [['id', 'commentNumber'], 'content', 'createdAt', 'updatedAt', 'userId', 'postId', ['commentId', 'parentId']],
+      attributes: [['id', 'commentNumber'], 'content', 'createdAt', 'updatedAt', ['userId', 'userNumber'], ['postId', 'postNumber'], ['commentId', 'parentCommentNumber']],
       include: [{
         model: db.User,
         attributes: [['id', 'userNumber'], 'userId', 'nickName'],

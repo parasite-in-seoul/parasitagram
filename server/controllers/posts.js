@@ -18,7 +18,7 @@ exports.getPostsByUserId = async (req, res, next) => {
         attributes: [['id', 'imageNumber'], 'src', 'createdAt', 'updatedAt'],
       }, {
         model: db.Comment,
-        attributes: [['id', 'commentNumber'], 'content', 'createdAt', 'updatedAt', 'userId', 'postId', ['commentId', 'parentId']],
+        attributes: [['id', 'commentNumber'], 'content', 'createdAt', 'updatedAt', ['userId', 'userNumber'], ['postId', 'postNumber'], ['commentId', 'parentCommentNumber']],
         include: [
           {
             model: db.User,

@@ -1,0 +1,225 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: 'Test API'
+  description: 'Test API'
+servers:
+  - description: Test API
+    url: http://13.209.6.153:3000/
+  - description: Local API
+    url: http://localhost:3000/
+paths:
+  /api/post:
+    post:
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                content:
+                  type: string
+                image:
+                  type: string
+                  format: binary
+      responses:
+        default:
+          description: successful operation
+  '/api/post/{postId}':
+    get:
+      summary: Find post by postID
+      description: Returns a single post
+      parameters:
+        - name: postId
+          in: path
+          description: postID
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+        default:
+          description: successful operation
+  '/api/post/{postId}/comment':
+    post:
+      summary: Write Comment by postID
+      description: Returns a single comment
+      parameters:
+        - name: postId
+          in: path
+          description: postID
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                content:
+                  type: string
+      responses:
+        default:
+          description: successful operation
+  '/api/post/{commentId}/comment/child':
+    post:
+      summary: Write Child Comment by commentID
+      description: Returns a single comment
+      parameters:
+        - name: commentId
+          in: path
+          description: commentID
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                content:
+                  type: string
+      responses:
+        default:
+          description: successful operation
+  '/api/posts/{userId}':
+    get:
+      summary: Find post list by userID
+      description: Returns a post list
+      parameters:
+        - name: userId
+          in: path
+          description: userId
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Post'
+        default:
+          description: successful operation
+  /api/hashtag/posts:
+    get:
+      summary: Find Post Count Group by Hashtag
+      description: Returns a post counts by hashtag
+      parameters:
+        - name: hashtag
+          in: query
+          description: hashtag
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: successful operation
+  '/api/hashtag/{tag}':
+    get:
+      summary: Find Post List by Hashtag
+      description: Returns a post list by hashtag
+      parameters:
+        - name: tag
+          in: path
+          description: tag
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: successful operation
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        nickname:
+          type: string
+        userId:
+          type: string
+        password:
+          type: string
+    Post:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        content:
+          type: string
+        createdAt:
+          type: string
+          example: 'YYYY-MM-DDTHH:mm:ss.SSSZ'
+        updatedAt:
+          type: string
+          example: 'YYYY-MM-DDTHH:mm:ss.SSSZ'
+        UserId:
+          type: integer
+          format: int64
+        User:
+          type: object
+          properties:
+            id:
+              type: integer
+              format: int64
+            nickname:
+              type: string
+        Images:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                format: int64
+              src:
+                type: string
+              createdAt:
+                type: string
+                example: 'YYYY-MM-DDTHH:mm:ss.SSSZ'
+              updatedAt:
+                type: string
+                example: 'YYYY-MM-DDTHH:mm:ss.SSSZ'
+              PostId:
+                type: integer
+                format: int64
+        Comments:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                format: int64
+              content:
+                type: string
+              createdAt:
+                type: string
+                example: 'YYYY-MM-DDTHH:mm:ss.SSSZ'
+              updatedAt:
+                type: string
+                example: 'YYYY-MM-DDTHH:mm:ss.SSSZ'
+              UserId:
+                type: integer
+                format: int64
+              CommentId:
+                type: integer
+                format: int64
+              PostId:
+                type: integer
+                format: int64

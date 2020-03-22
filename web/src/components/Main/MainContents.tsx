@@ -6,12 +6,14 @@ import CardContent from "@material-ui/core/CardContent";
 import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
-import FavoriteIcon from '@material-ui/icons/Favorite';
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import {makeStyles, Theme} from "@material-ui/core/styles";
 import {red} from "@material-ui/core/colors";
+import * as moment from 'moment';
+
 import MainContentsImage from "./MainContentsImage";
+
 import {useState} from "react";
 
 const images = [
@@ -20,6 +22,56 @@ const images = [
   'https://homepages.cae.wisc.edu/~ece533/images/baboon.png',
   'https://homepages.cae.wisc.edu/~ece533/images/barbara.png',
 ];
+
+const dummyData = {
+  "postNumber": 2,
+  "content": "#test 테스트 글입니다",
+  "createdAt": "2020-03-21T13:36:09.000Z",
+  "updatedAt": "2020-03-21T13:36:09.000Z",
+  "userNumber": 1,
+  "likers": [],
+  "hashtags": [
+    {
+      "hashtagNumber": 1,
+      "name": "test",
+      "createdAt": "2020-03-21T13:35:21.000Z",
+      "updatedAt": "2020-03-21T13:35:21.000Z",
+      "postHashtag": {
+        "createdAt": "2020-03-21T13:36:09.000Z",
+        "updatedAt": "2020-03-21T13:36:09.000Z",
+        "hashtagId": 1,
+        "postId": 2
+      }
+    }
+  ],
+  "images": [
+    {
+      "imageNumber": 1,
+      "src": "/images/image1.jpg",
+      "createdAt": "2020-03-21T13:36:09.000Z",
+      "updatedAt": "2020-03-21T13:36:09.000Z"
+    },
+    {
+      "imageNumber": 2,
+      "src": "/images/image2.jpg",
+      "createdAt": "2020-03-21T13:36:09.000Z",
+      "updatedAt": "2020-03-21T13:36:09.000Z"
+    },
+  ],
+  "comments": [
+    {
+      "commentNumber": 1,
+      "content": "댓글테스트",
+      "createdAt": "2020-03-21T13:36:57.000Z",
+      "updatedAt": "2020-03-21T13:36:57.000Z",
+      "userNumber": null,
+      "postNumber": 2,
+      "parentCommentNumber": null,
+      "commentLikers": []
+    }
+  ]
+};
+
 
 const MainContents = () => {
   const [contentsTextSpread, setContentsTextSpread] = useState(false);
@@ -75,6 +127,13 @@ const MainContents = () => {
       // marginLeft: "10px",
       // marginRight: "10px",
     },
+    timeAgo: {
+      fontWeight: "lighter",
+      fontSize: "10px",
+      marginLeft: "10px",
+      cursor:"pointer"
+      // marginRight: "10px",
+    },
   }));
 
   const classes = useStyles();
@@ -83,6 +142,13 @@ const MainContents = () => {
     `2020SS 🎾 THE TENNIS ${'\n'} 최수영과 함께한 #휠라언더웨어 20SS 컬렉션을 감상해보세요. #filaunderwear #IMYMEMINE`;
 
   const tempTextContents2 : string = "그리고 서일콘 고맙다는 말 너무 늦게 올려서 미안하고 똑같이 사랑해요💙";
+
+  // const tempTimeStamp : () => string = () => {
+  //
+  //   return(
+  //     moment('2017-02-27T00:00:00.000Z').utc().format('YYYY-MM-DD')
+  //   )
+  // };
 
   const textSubstr = (text:string) =>{
     const tempAddText = (<>
@@ -103,6 +169,23 @@ const MainContents = () => {
       <>
         {tempAddText}
         {tempAddText2}
+      </>
+    )
+  };
+
+  const postComments = () => {
+
+
+    return(
+      <>
+        <Typography variant="button" display="inline"  style={{cursor:"pointer"}}
+                    className={classes.like} onClick={()=>{console.log(123)}}>
+          ID
+        </Typography>
+        <Typography variant="button" display="inline"
+                    className={classes.likeText} >
+          댓글
+        </Typography>
       </>
     )
   };
@@ -150,6 +233,13 @@ const MainContents = () => {
                         className={classes.likeText} >
               {tempTextContennts.length < 10 ? tempTextContennts : contentsTextSpread ? tempTextContennts : textSubstr(tempTextContennts)
               }
+            </Typography>
+            <br/>
+            {postComments}
+            <br/>
+            <Typography variant="button" display="inline"
+                        className={classes.timeAgo} >
+              13시간 전
             </Typography>
           </CardContent>
         </Card>

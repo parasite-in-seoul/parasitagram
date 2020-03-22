@@ -6,10 +6,10 @@ exports.getPostCountGroupByHashtag = async (req, res, next) => {
 
     const postCountGroup = await db.Hashtag.findAll({
       includeIgnoreAttributes: false,
-      attributes: ['id', 'name', [db.sequelize.fn('count', db.sequelize.col('Posts.id')), 'postCount']],
+      attributes: [['id', 'hashtagNumber'], 'name', [db.sequelize.fn('count', db.sequelize.col('Posts.id')), 'postCount']],
       include: [{
         model: db.Post,
-        attributes: ['id'], 
+        attributes: [['id', 'postNumber']], 
         through: {
           attributes: []
         },
@@ -40,21 +40,30 @@ exports.getPostCountGroupByHashtag = async (req, res, next) => {
 exports.getPostListByHashtag = async (req, res, next) => {
   try {
     const posts = await db.Post.findAll({
+      attributes: [['id', 'postNumber'], 'content', 'createdAt', 'updatedAt', ['userId', 'userNumber']],
       include: [{
         model: db.Hashtag,
+        attributes: [['id', 'hashtagNumber'], 'name', 'createdAt', 'updatedAt'],
         where: { name: decodeURIComponent(req.params.tag) },
       }, {
         model: db.User,
-        attributes: ['id', 'nickName'],
+        through: 'like',
+        as: 'likers',
+        attributes: [['id', 'userNumber'], 'userId', 'nickName'],
       }, {
         model: db.Image,
-      }, {
-        model: db.User,
-        through: 'Like',
-        as: 'Likers',
-        attributes: ['id'],
+        attributes: [['id', 'imageNumber'], 'src', 'createdAt', 'updatedAt'],
       }, {
         model: db.Comment,
+        attributes: [['id', 'commentNumber'], 'content', 'createdAt', 'updatedAt', ['userId', 'userNumber'], ['postId', 'postNumber'], ['commentId', 'parentCommentNumber']],
+        include: [
+          {
+            model: db.User,
+            through: 'commentLike',
+            as: 'commentLikers',
+            attributes: [['id', 'userNumber'], 'userId', 'nickName'],
+          }
+        ]
       }
       ],
       order: [['createdAt', 'DESC']],

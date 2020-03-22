@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const User = sequelize.define('User', { // 테이블명은 users
+  const User = sequelize.define('user', { // 테이블명은 users
     nickName: {
       type: DataTypes.STRING(20), // 20글자 이하
       allowNull: false, // 필수
@@ -14,16 +14,18 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
   }, {
+    table_name: 'users',
     charset: 'utf8',
     collate: 'utf8_general_ci', // 한글이 저장돼요
   });
 
   User.associate = (db) => {
-    db.User.hasMany(db.Post, { as: 'Posts' });
+    db.User.hasMany(db.Post, { as: 'posts' });
     db.User.hasMany(db.Comment);
-    db.User.belongsToMany(db.Post, { through: 'Like', as: 'Liked' });
-    db.User.belongsToMany(db.User, { through: 'Follow', as: 'Followers', foreignKey: 'followingId' });
-    db.User.belongsToMany(db.User, { through: 'Follow', as: 'Followings', foreignKey: 'followerId' });
+    db.User.belongsToMany(db.Comment, { through: 'commentLike', as: 'commentLiked' });
+    db.User.belongsToMany(db.Post, { through: 'like', as: 'liked' });
+    db.User.belongsToMany(db.User, { through: 'follow', as: 'followers', foreignKey: 'followingId' });
+    db.User.belongsToMany(db.User, { through: 'follow', as: 'followings', foreignKey: 'followerId' });
   };
 
   return User;

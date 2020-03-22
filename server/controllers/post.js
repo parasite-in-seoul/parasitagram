@@ -25,7 +25,7 @@ exports.savePost = async (req, res, next) => {
     const hashtags = req.body.content.match(/#[^\s]+/g);
     const newPost = await db.Post.create({
       content: req.body.content,
-      UserId: req.user.id,
+      userId: req.user.id,
     });
     if (hashtags) {
       const result = await Promise.all(hashtags.map(tag => db.Hashtag.findOrCreate({
@@ -43,15 +43,29 @@ exports.savePost = async (req, res, next) => {
 
     const fullPost = await db.Post.findOne({
       where: { id: newPost.id },
+      attributes: [['id', 'postNumber'], 'content', 'createdAt', 'updatedAt', 'userId'],
       include: [{
         model: db.User,
-        attributes: ['id', 'nickname'],
+        through: 'like',
+        as: 'likers',
+        attributes: [['id', 'userNumber'], 'userId', 'nickName'],
+      }, {
+        model: db.Hashtag,
+        attributes: [['id', 'hashtagNumber'], 'name', 'createdAt', 'updatedAt'],
       }, {
         model: db.Image,
+        attributes: [['id', 'imageNumber'], 'src', 'createdAt', 'updatedAt'],
       }, {
-        model: db.User,
-        as: 'Likers',
-        attributes: ['id'],
+        model: db.Comment,
+        attributes: [['id', 'commentNumber'], 'content', 'createdAt', 'updatedAt', ['userId', 'userNumber'], ['postId', 'postNumber'], ['commentId', 'parentCommentNumber']],
+        include: [
+          {
+            model: db.User,
+            through: 'commentLike',
+            as: 'commentLikers',
+            attributes: [['id', 'userNumber'], 'userId', 'nickName'],
+          }
+        ]
       }],
     });
     res.json(fullPost);
@@ -64,11 +78,29 @@ exports.getPostById = async (req, res, next) => {
   try {
     const post = await db.Post.findOne({
       where: { id: req.params.id },
+      attributes: [['id', 'postNumber'], 'content', 'createdAt', 'updatedAt', ['userId', 'userNumber']],
       include: [{
         model: db.User,
-        attributes: ['id', 'nickname'],
+        through: 'like',
+        as: 'likers',
+        attributes: [['id', 'userNumber'], 'userId', 'nickName'],
+      }, {
+        model: db.Hashtag,
+        attributes: [['id', 'hashtagNumber'], 'name', 'createdAt', 'updatedAt'],
       }, {
         model: db.Image,
+        attributes: [['id', 'imageNumber'], 'src', 'createdAt', 'updatedAt'],
+      }, {
+        model: db.Comment,
+        attributes: [['id', 'commentNumber'], 'content', 'createdAt', 'updatedAt', ['userId', 'userNumber'], ['postId', 'postNumber'], ['commentId', 'parentCommentNumber']],
+        include: [
+          {
+            model: db.User,
+            through: 'commentLike',
+            as: 'commentLikers',
+            attributes: [['id', 'userNumber'], 'userId', 'nickName'],
+          }
+        ]
       }],
     });
     res.json(post);
@@ -85,19 +117,20 @@ exports.postComment = async (req, res, next) => { // POST /api/post/1000000/comm
       return res.status(404).send('포스트가 존재하지 않습니다.');
     }
     const newComment = await db.Comment.create({
-      PostId: post.id,
-      UserId: 1, //req.user.id
+      postId: post.id,
+      userId: 1, //req.user.id
       content: req.body.content,
-      CommentId: null,
+      commentId: null,
     });
     await post.addComment(newComment.id);
     const comment = await db.Comment.findOne({
       where: {
         id: newComment.id,
       },
+      attributes: [['id', 'commentNumber'], 'content', 'createdAt', 'updatedAt', ['userId', 'userNumber'], ['postId', 'postNumber'], ['commentId', 'parentCommentNumber']],
       include: [{
         model: db.User,
-        attributes: ['id', 'nickname'],
+        attributes: [['id', 'userNumber'], 'userId', 'nickName'],
       }],
     });
     return res.json(comment);
@@ -118,9 +151,9 @@ exports.postChildComment = async (req, res, next) => { // POST /api/post/1000000
       return res.status(404).send('포스트가 존재하지 않습니다.');
     }
     const newComment = await db.Comment.create({
-      PostId: parentComment.PostId,
-      CommentId: parentComment.id,
-      UserId: 1, //req.user.id
+      postId: parentComment.PostId,
+      commentId: parentComment.id,
+      userId: 1, //req.user.id
       content: req.body.content,
     });
     await post.addComment(newComment.id);
@@ -128,9 +161,10 @@ exports.postChildComment = async (req, res, next) => { // POST /api/post/1000000
       where: {
         id: newComment.id,
       },
+      attributes: [['id', 'commentNumber'], 'content', 'createdAt', 'updatedAt', ['userId', 'userNumber'], ['postId', 'postNumber'], ['commentId', 'parentCommentNumber']],
       include: [{
         model: db.User,
-        attributes: ['id', 'nickname'],
+        attributes: [['id', 'userNumber'], 'userId', 'nickName'],
       }],
     });
     return res.json(comment);

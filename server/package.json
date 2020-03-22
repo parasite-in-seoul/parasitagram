@@ -2,11 +2,11 @@
   "name": "server",
   "version": "1.0.0",
   "description": "Parasitagram의 서버 프로젝트입니다.",
-  "main": "main.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon",
-    "start": "pm2 start main.js"
+    "start": "pm2 start index.js"
   },
   "author": "",
   "license": "ISC",

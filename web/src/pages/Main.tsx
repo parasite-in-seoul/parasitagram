@@ -1,21 +1,7 @@
 import * as React from 'react';
-import Container from '@material-ui/core/Container';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
-import clsx from 'clsx';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
-import CardActions from '@material-ui/core/CardActions';
-import Collapse from '@material-ui/core/Collapse';
-import Avatar from '@material-ui/core/Avatar';
-import IconButton from '@material-ui/core/IconButton';
 import { red } from '@material-ui/core/colors';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { makeStyles, Theme } from '@material-ui/core/styles';
+import MainContents from "../components/Main/MainContents";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -53,30 +39,7 @@ const Main = () => {
       <div>
         시작하기
       </div>
-      <div>
-        <Container maxWidth="md">
-          <Card className={classes.root} variant="outlined">
-            <CardHeader
-              avatar={
-                <Avatar aria-label="recipe" className={classes.avatar}>
-                  R
-                </Avatar>
-              }
-              action={
-                <IconButton aria-label="settings">
-                  <MoreVertIcon />
-                </IconButton>
-              }
-              title="Shrimp and Chorizo Paella"
-            />
-            <CardMedia
-              src="/Users/Tanktwo_mac/Documents/GitHub/parasitagram/web/public/images/Content_Image.jpg"
-              title="Paella dish"
-            />
-          </Card>
-          <img src="/images/Content_Image.jpg" alt="image1" className={classes.images}/>
-        </Container>
-      </div>
+        <MainContents />
       <div>
         오른쪽 컨텐츠
       </div>

@@ -138,7 +138,7 @@ exports.postComment = async (req, res, next) => { // POST /api/post/1000000/comm
     console.error(e);
     return next(e);
   }
-}
+};
 
 exports.postChildComment = async (req, res, next) => { // POST /api/post/1000000/comment/child
   try {
@@ -172,4 +172,60 @@ exports.postChildComment = async (req, res, next) => { // POST /api/post/1000000
     console.error(e);
     return next(e);
   }
-}
+};
+
+exports.postLike = async (req, res, next) => {
+  try {
+    const post = await db.Post.findOne({ where: { id: req.params.id }});
+    if (!post) {
+      return res.status(404).send('포스트가 존재하지 않습니다.');
+    }
+    await post.addLiker(req.user.id);
+    res.json({ userId: req.user.id });
+  } catch (e) {
+    console.error(e);
+    next(e);
+  }
+};
+
+exports.deletePostLike = async (req, res, next) => {
+  try {
+    const post = await db.Post.findOne({ where: { id: req.params.id }});
+    if (!post) {
+      return res.status(404).send('포스트가 존재하지 않습니다.');
+    }
+    await post.removeLiker(req.user.id);
+    res.json({ userId: req.user.id });
+  } catch (e) {
+    console.error(e);
+    next(e);
+  }
+};
+
+exports.commentLike = async (req, res, next) => {
+  try {
+    const comment = await db.Comment.findOne({ where: { id: req.params.id }});
+    if (!comment) {
+      return res.status(404).send('댓글이 존재하지 않습니다.');
+    }
+    await comment.addCommentLiker(req.user.id);
+    res.json({ userId: req.user.id });
+  } catch (e) {
+    console.error(e);
+    next(e);
+  }
+};
+
+exports.deleteCommentLike = async (req, res, next) => {
+  try {
+    const comment = await db.Comment.findOne({ where: { id: req.params.id }});
+    if (!comment) {
+      return res.status(404).send('포스트가 존재하지 않습니다.');
+    }
+    await comment.removeCommentLiker(req.user.id);
+    res.json({ userId: req.user.id });
+  } catch (e) {
+    console.error(e);
+    next(e);
+  }
+};

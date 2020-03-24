@@ -1,7 +1,10 @@
-{
+const dotenv = require('dotenv');
+dotenv.config();
+
+module.exports = {
   "development": {
     "username": "parasite",
-    "password": "parasitagram",
+    "password": process.env.DB_PASSWORD,
     "database": "parasitagram",
     "host": "127.0.0.1",
     "dialect": "mysql",
@@ -9,7 +12,7 @@
   },
   "test": {
     "username": "parasite",
-    "password": "parasitagram",
+    "password": process.env.DB_PASSWORD,
     "database": "parasitagram",
     "host": "13.209.6.153",
     "dialect": "mysql",
@@ -17,10 +20,10 @@
   },
   "production": {
     "username": "parasite",
-    "password": "parasitagram",
+    "password": process.env.DB_PASSWORD,
     "database": "parasitagram",
     "host": "13.209.6.153",
     "dialect": "mysql",
     "operatorsAliases": false
   }
-}
+};

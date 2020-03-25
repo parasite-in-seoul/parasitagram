@@ -1,0 +1,9 @@
+*.log
+.next/
+node_modules/
+.DS_*
+.env
+uploads/
+images/
+.vscode/
+package-lock.json

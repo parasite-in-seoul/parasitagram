@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useEffect, useRef } from 'react';
 import Container from "@material-ui/core/Container";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -47,13 +48,13 @@ const dummyData = {
   "images": [
     {
       "imageNumber": 1,
-      "src": "/images/image1.jpg",
+      "src": "https://homepages.cae.wisc.edu/~ece533/images/airplane.png",
       "createdAt": "2020-03-21T13:36:09.000Z",
       "updatedAt": "2020-03-21T13:36:09.000Z"
     },
     {
       "imageNumber": 2,
-      "src": "/images/image2.jpg",
+      "src": "https://homepages.cae.wisc.edu/~ece533/images/arctichare.png",
       "createdAt": "2020-03-21T13:36:09.000Z",
       "updatedAt": "2020-03-21T13:36:09.000Z"
     },
@@ -134,9 +135,27 @@ const MainContents = () => {
       cursor:"pointer"
       // marginRight: "10px",
     },
+    commentWrite: {
+      fontWeight: "lighter",
+      fontSize: "16px",
+      marginLeft: "10px",
+      border: "1px solid"
+      // marginRight: "10px",
+    },
   }));
 
   const classes = useStyles();
+
+  const tempImages = () =>{
+    const temp: string[] = [];
+    dummyData.images.map(row=>{
+      temp.push(row.src);
+    });
+    return temp;
+  };
+
+
+
 
   const tempTextContennts : string =
     `2020SS 🎾 THE TENNIS ${'\n'} 최수영과 함께한 #휠라언더웨어 20SS 컬렉션을 감상해보세요. #filaunderwear #IMYMEMINE`;
@@ -211,7 +230,7 @@ const MainContents = () => {
             src="/Users/Tanktwo_mac/Documents/GitHub/parasitagram/web/public/images/Content_Image.jpg"
             title="Paella dish"
           />
-          <MainContentsImage src={images} alt={'image1'}
+          <MainContentsImage src={tempImages()} alt={'image1'}
           />
           <CardContent style={{padding : 5}}>
             <Typography >
@@ -235,13 +254,15 @@ const MainContents = () => {
               }
             </Typography>
             <br/>
-            {postComments}
+            {postComments()}
             <br/>
             <Typography variant="button" display="inline"
                         className={classes.timeAgo} >
               13시간 전
             </Typography>
           </CardContent>
+          {/*<CardContent style={{padding : 5}}>*/}
+          {/*</CardContent>*/}
         </Card>
 
 

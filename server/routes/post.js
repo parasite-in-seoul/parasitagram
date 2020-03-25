@@ -15,4 +15,16 @@ router.post('/:id/comment',
 router.post('/:id/comment/child',
   postCtrl.postChildComment);
 
+router.post('/:id/like', 
+  postCtrl.postLike);
+
+router.delete('/:id/like', 
+  postCtrl.deletePostLike);
+
+router.post('/:id/like/comment', 
+  postCtrl.commentLike);
+
+router.delete('/:id/like/comment', 
+  postCtrl.deleteCommentLike);
+
 module.exports = router;

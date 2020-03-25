@@ -151,6 +151,96 @@ paths:
                   $ref: '#/components/schemas/Post'
         default:
           description: successful operation
+  '/api/post/{postId}/like':
+    post:
+      summary: Like Post by postID
+      description: Returns a like user
+      parameters:
+        - name: postId
+          in: path
+          description: postID
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: string
+      responses:
+        default:
+          description: successful operation
+    delete:
+      summary: Dislike Post by postID
+      description: Returns a dislike user
+      parameters:
+        - name: postId
+          in: path
+          description: postID
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: string
+      responses:
+        default:
+          description: successful operation
+  '/api/post/{commentId}/like/comment':
+    post:
+      summary: Like Post by commentId
+      description: Returns a like user
+      parameters:
+        - name: commentId
+          in: path
+          description: commentId
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: string
+      responses:
+        default:
+          description: successful operation
+    delete:
+      summary: Dislike Comment by commentId
+      description: Returns a dislike user
+      parameters:
+        - name: commentId
+          in: path
+          description: commentId
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: string
+      responses:
+        default:
+          description: successful operation
 components:
   schemas:
     User:

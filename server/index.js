@@ -43,6 +43,7 @@ app.use('/', express.static('uploads'));
 
 app.use('/api/auth', require('./routes/auth'));
 
+app.use('/api/user', require('./routes/user'));
 app.use('/api/post', require('./routes/post'));
 app.use('/api/posts', require('./routes/posts'));
 app.use('/api/hashtag', require('./routes/hashtag'));
@@ -53,6 +54,6 @@ app.get('/hello', function(req, res) {
 
 
 
-const server = app.listen(3000, () => {
-    console.log('Express listening on port', 3000);
+const server = app.listen(4000, () => {
+    console.log('Express listening on port', 4000);
 });

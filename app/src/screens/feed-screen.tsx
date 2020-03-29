@@ -1,7 +1,9 @@
 import React from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
+import { ScrollView, Button } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { FeedNavigatorParamList } from '../types/navigation';
+
+import Post from '../components/post';
 
 type FeedScreenNavigationProp = StackNavigationProp<
   FeedNavigatorParamList,
@@ -14,22 +16,15 @@ type Props = {
 
 const FeedScreen = ({ navigation }: Props) => {
   return (
-    <View style={styles.feedScreenContainer}>
-      <Text>This is FeedScreen</Text>
+    <ScrollView>
+      <Post />
+
       <Button
         title="Go to UserScreen"
         onPress={() => navigation.push('User')}
       />
-    </View>
+    </ScrollView>
   );
 };
-
-const styles = StyleSheet.create({
-  feedScreenContainer: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
 
 export default FeedScreen;

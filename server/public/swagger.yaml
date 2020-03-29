@@ -5,9 +5,9 @@ info:
   description: 'Test API'
 servers:
   - description: Test API
-    url: http://13.209.6.153:3000/
+    url: http://13.209.6.153:4000/
   - description: Local API
-    url: http://localhost:3000/
+    url: http://localhost:4000/
 paths:
   /api/post:
     post:
@@ -238,6 +238,115 @@ paths:
               properties:
                 userId:
                   type: string
+      responses:
+        default:
+          description: successful operation
+  '/api/user/{userNumber}/followings':
+      get:
+        summary: Get followings by userNumber
+        description: Returns a followings
+        parameters:
+          - name: userNumber
+            in: path
+            description: userNumber
+            required: true
+            schema:
+              type: integer
+              format: int64
+        responses:
+          '200':
+            description: successful operation
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      userNumber:
+                        type: integer
+                        format: int64
+                      userId:
+                        type: string
+                      nickName:
+                        type: string
+          default:
+            description: successful operation
+  '/api/user/{userNumber}/followers':
+    get:
+      summary: Get followers by userNumber
+      description: Returns a followers
+      parameters:
+        - name: userNumber
+          in: path
+          description: userNumber
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+            description: successful operation
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      userNumber:
+                        type: integer
+                        format: int64
+                      userId:
+                        type: string
+                      nickName:
+                        type: string
+        default:
+          description: successful operation
+  '/api/post/{userNumber}/follow':
+    post:
+      summary: Follow User by follow userNumber
+      description: Returns a follow userNnumber
+      parameters:
+        - name: userNumber
+          in: path
+          description: userNumber
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userNnumber:
+                  type: integer
+                  format: int64
+      responses:
+        default:
+          description: successful operation
+    delete:
+      summary: Unfollow User by Unfollow userNumber
+      description: Returns a Unfollow userNnumber
+      parameters:
+        - name: userNnumber
+          in: path
+          description: userNnumber
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userNnumber:
+                  type: integer
+                  format: int64
       responses:
         default:
           description: successful operation

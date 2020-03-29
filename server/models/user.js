@@ -13,6 +13,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING(100), // 100글자 이하
       allowNull: false,
     },
+    signUpType: {
+      type: DataTypes.STRING(20), 
+      allowNull: false,
+    },
   }, {
     table_name: 'users',
     charset: 'utf8',

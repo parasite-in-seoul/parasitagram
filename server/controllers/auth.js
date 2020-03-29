@@ -1,4 +1,4 @@
-const db = require('../../models');
+const db = require('../models');
 const multer = require('multer');
 const path = require('path');
 const bcrypt = require('bcrypt');
@@ -20,6 +20,7 @@ exports.signUp = async (req, res, next) => {
         nickName: req.body.nickname,
         userId: req.body.userId,
         password: hashedPassword,
+        signUpType: 'local',
     });
     console.log(newUser);
 

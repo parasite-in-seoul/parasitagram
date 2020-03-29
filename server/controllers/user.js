@@ -6,9 +6,9 @@ exports.getFollowers = async (req, res, next) => {
       where: { id: parseInt(req.params.id, 10) || (req.user && req.user.id) || 0 },
     }); // req.params.id가 문자열 '0'
     const followers = await user.getFollowers({
-      attributes: ['id', 'nickname'],
-      limit: parseInt(req.query.limit, 10),
-      offset: parseInt(req.query.offset, 10),
+      attributes: [['id', 'userNumber'], 'userId', 'nickName'],
+      // limit: parseInt(req.query.limit, 10),
+      // offset: parseInt(req.query.offset, 10),
     });
     res.json(followers);
   } catch (e) {
@@ -22,12 +22,12 @@ exports.getFollowings = async (req, res, next) => {
     const user = await db.User.findOne({
       where: { id: parseInt(req.params.id, 10) || (req.user && req.user.id) || 0 },
     });
-    const followers = await user.getFollowings({
-      attributes: ['id', 'nickname'],
-      limit: parseInt(req.query.limit, 10),
-      offset: parseInt(req.query.offset, 10),
+    const followings = await user.getFollowings({
+      attributes: [['id', 'userNumber'], 'userId', 'nickName'],
+      // limit: parseInt(req.query.limit, 10),
+      // offset: parseInt(req.query.offset, 10),
     });
-    res.json(followers);
+    res.json(followings);
   } catch (e) {
     console.error(e);
     next(e);

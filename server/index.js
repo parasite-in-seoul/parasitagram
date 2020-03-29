@@ -41,8 +41,9 @@ app.use('/', express.static(__dirname + '/../web'));
 app.use('/', express.static('public'));
 app.use('/', express.static('uploads'));
 
-app.use('/sys/auth', require('./routes/sys/auth'));
+app.use('/api/auth', require('./routes/auth'));
 
+app.use('/api/user', require('./routes/user'));
 app.use('/api/post', require('./routes/post'));
 app.use('/api/posts', require('./routes/posts'));
 app.use('/api/hashtag', require('./routes/hashtag'));

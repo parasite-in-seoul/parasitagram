@@ -21,15 +21,19 @@ router.post('/:id/comment/child',
   postCtrl.postChildComment);
 
 router.post('/:id/like', 
+  isLoggedIn, 
   postCtrl.postLike);
 
 router.delete('/:id/like', 
+  isLoggedIn, 
   postCtrl.deletePostLike);
 
 router.post('/:id/like/comment', 
+  isLoggedIn, 
   postCtrl.commentLike);
 
 router.delete('/:id/like/comment', 
+  isLoggedIn, 
   postCtrl.deleteCommentLike);
 
 module.exports = router;

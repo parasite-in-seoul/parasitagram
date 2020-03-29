@@ -350,6 +350,52 @@ paths:
       responses:
         default:
           description: successful operation
+  /api/auth/signUp:
+      post:
+        summary: sign up
+        requestBody:
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  nickname:
+                    type: string
+                  userId:
+                    type: string
+                  password:
+                    type: string
+        responses:
+          default:
+            description: success sign up
+  /api/auth/signIn:
+      post:
+        summary: sign in  
+        requestBody:
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  userId:
+                    type: string
+                  password:
+                    type: string
+        responses:
+          default:
+            description: success sign in
+  /api/auth/logOut:
+    get:
+      summary: log out
+      responses:
+        default:
+          description: success log out
+  /api/auth:
+    get:
+      summary: log in test
+      responses:
+        default:
+          description: test
 components:
   schemas:
     User:

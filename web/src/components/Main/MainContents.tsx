@@ -11,6 +11,8 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import {makeStyles, Theme} from "@material-ui/core/styles";
 import {red} from "@material-ui/core/colors";
+import { InputBase } from '@material-ui/core';
+
 import * as moment from 'moment';
 
 import MainContentsImage from "./MainContentsImage";
@@ -76,6 +78,7 @@ const dummyData = {
 
 const MainContents = () => {
   const [contentsTextSpread, setContentsTextSpread] = useState(false);
+  const [commentWriteInput, setCommentWriteInput] = useState('');
 
 
   const useStyles = makeStyles((theme: Theme) => ({
@@ -137,10 +140,10 @@ const MainContents = () => {
     },
     commentWrite: {
       fontWeight: "lighter",
-      fontSize: "16px",
-      marginLeft: "10px",
-      border: "1px solid"
-      // marginRight: "10px",
+      padding: "16px",
+      paddingBottom: "16px",
+      border: "1px solid #efefef",
+      color: "#262626"
     },
   }));
 
@@ -209,7 +212,12 @@ const MainContents = () => {
     )
   };
 
+  const changeCommentWriteInput = (e) => {
+    setCommentWriteInput(e.target.value)
+  };
+
   return (
+    <>
     <div>
       <Container maxWidth="md">
         <Card className={classes.root} variant="outlined">
@@ -261,13 +269,32 @@ const MainContents = () => {
               13시간 전
             </Typography>
           </CardContent>
-          {/*<CardContent style={{padding : 5}}>*/}
-          {/*</CardContent>*/}
+          <CardContent className={classes.commentWrite}>
+            <InputBase onChange={changeCommentWriteInput}
+              placeholder={"댓글 달기..."}
+                        style={{color: "#8E8E8E", fontSize: "15px", paddingBottom: "0px"}}
+           />
+            {
+              commentWriteInput.length>0 ?
+                <Typography  display="inline"
+                  style={{float:"right", color: "#0095f6", cursor: "pointer"}}>
+                  게시
+                </Typography> :
+                <Typography  display="inline"
+                  style={{float:"right", color: "#C6DFFA",}}>
+                  게시
+                </Typography>
+
+            }
+
+
+          </CardContent>
         </Card>
 
 
       </Container>
     </div>
+    </>
   );
 };
 

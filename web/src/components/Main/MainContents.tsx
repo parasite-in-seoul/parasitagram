@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useEffect, useRef } from 'react';
+import { useDispatch } from 'react-redux';
 import Container from "@material-ui/core/Container";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -16,6 +17,75 @@ import { InputBase } from '@material-ui/core';
 import * as moment from 'moment';
 
 import MainContentsImage from "./MainContentsImage";
+
+const commonProps = {
+  backgroundImage: 'url("/images/icons-spritesheet2.png")',
+  backgroundSize: '355px 344px',
+  backgroundRepeat: 'no-repeat',
+  height: 24,
+  width: 24,
+  // justifySelf: 'center',
+  '&:hover': {
+    cursor: 'pointer'
+  }
+};
+
+const usePostStyles = makeStyles(theme => ({
+  article: {
+    border: '1px solid #e6e6e6',
+    background: '#ffffff',
+    marginBottom: 60,
+    [theme.breakpoints.down('xs')]: {
+      border: 'unset',
+      marginBottom: 0
+    }
+  },
+
+  nameCardWrapper: {
+    display: 'grid',
+    gridAutoFlow: 'column',
+    gridTemplateColumns: 'auto minmax(auto, 20px)',
+    gridGap: 10,
+    alignItems: 'center',
+    padding: 16
+  },
+  icon: {
+    backgroundImage: 'url("/images/icons-spritesheet1.png")',
+    backgroundPosition: '-217px -170px',
+    backgroundSize: '503px 516px',
+    backgroundRepeat: 'no-repeat',
+    height: 24,
+    width: 18,
+    justifySelf: 'center',
+    '&:hover': {
+      cursor: 'pointer'
+    }
+  },
+
+  image: {
+    width: '100%'
+  },
+
+  typography: {
+    fontWeight: 600
+  },
+  distance: {
+    fontSize: 10
+  }
+}));
+
+const commonKeyFramesProps = {
+  '0%': { transform: 'scale(1)' },
+  '25%': { transform: 'scale(1.2)' },
+  '50%': { transform: 'scale(0.95)' },
+  '100%': { transform: 'scale(1)' }
+};
+const commonAnimationProps = {
+  animationTimingFunction: 'ease-in-out',
+  transform: 'scale(1)'
+};
+
+
 
 import {useState} from "react";
 
@@ -78,6 +148,7 @@ const dummyData = {
 
 const MainContents = () => {
   const [contentsTextSpread, setContentsTextSpread] = useState(false);
+  const [contentsHeartIcon, setContentsHeartIcon] = useState(false);
   const [commentWriteInput, setCommentWriteInput] = useState('');
 
 
@@ -122,7 +193,7 @@ const MainContents = () => {
       float: "right",
       cursor:"pointer"
     },
-    like: {
+    likeID: {
       marginLeft: "10px",
       marginRight: "10px",
       fontWeight: "bolder"
@@ -145,6 +216,43 @@ const MainContents = () => {
       border: "1px solid #efefef",
       color: "#262626"
     },
+    iconWrapper: {
+      display: 'grid',
+      gridAutoFlow: 'column',
+      gridTemplateColumns: '24px 24px 24px minmax(24px, auto)',
+      gridGap: 16,
+      padding: '6px 0px'
+    },
+    container: {
+      padding: '0px 16px 8px'
+    },
+    like: {
+      ...commonProps,
+      backgroundPosition: '-275px -269px',
+      animation: '$like-button-animation 0.45s',
+      ...commonAnimationProps
+    },
+    liked: {
+      ...commonProps,
+      backgroundPosition: '-250px -269px',
+      animation: '$liked-button-animation 0.45s',
+      ...commonAnimationProps
+    },
+    '@keyframes like-button-animation': commonKeyFramesProps,
+    '@keyframes liked-button-animation': commonKeyFramesProps,
+    comments: {
+      ...commonProps,
+      backgroundPosition: '-117px -97px'
+    },
+    share: {
+      ...commonProps,
+      backgroundPosition: '-124px -226px'
+    },
+    save: {
+      ...commonProps,
+      backgroundPosition: '-48px -320px',
+      justifySelf: 'right'
+    },
   }));
 
   const classes = useStyles();
@@ -157,7 +265,25 @@ const MainContents = () => {
     return temp;
   };
 
+  const onContentsHeartIcon = () => {
+    setContentsHeartIcon(!contentsHeartIcon);
+  };
 
+
+  function LikeButton({ id, ownerHasLiked }) {
+    const dispatch = useDispatch();
+    const className = ownerHasLiked ? classes.liked : classes.like;
+
+    const handleLikeClick = () => {
+      setContentsHeartIcon(!contentsHeartIcon)
+    }
+    // dispatch(likeAction({ params: { id, type: 'like' } }));
+
+
+    const onClick = handleLikeClick;
+
+    return <div className={className} onClick={onClick} />;
+  }
 
 
   const tempTextContennts : string =
@@ -201,7 +327,7 @@ const MainContents = () => {
     return(
       <>
         <Typography variant="button" display="inline"  style={{cursor:"pointer"}}
-                    className={classes.like} onClick={()=>{console.log(123)}}>
+                    className={classes.likeID} onClick={()=>{console.log(123)}}>
           ID
         </Typography>
         <Typography variant="button" display="inline"
@@ -242,18 +368,37 @@ const MainContents = () => {
           />
           <CardContent style={{padding : 5}}>
             <Typography >
-              <img src="images/스크린샷 2020-02-28 오후 7.31.29.png" alt="instagramlogo" className={classes.buttonOthers}/>
-              <img src="images/contentsImg1.png" alt="instagramlogo" className={classes.buttonOthers2}/>
-              <img src="images/contentsImg2.png" alt="instagramlogo" className={classes.buttonOthers2}/>
-              <img src="images/contentsImg3.png" alt="instagramlogo" className={classes.buttonOthers3}/>
+              <div className={classes.container}>
+                <div className={classes.iconWrapper}>
+              <LikeButton id={123} ownerHasLiked={contentsHeartIcon} />
+              {/*{contentsHeartIcon ?*/}
+              {/*  <img src="images/스크린샷 2020-02-28 오후 7.31.29.png" alt="instagramlogo" className={classes.buttonOthers}*/}
+              {/*       onClick={onContentsHeartIcon}*/}
+              {/*       style={{background:"red"}}*/}
+              {/*  />*/}
+              {/*  :*/}
+              {/*  <img src="images/스크린샷 2020-02-28 오후 7.31.29.png" alt="instagramlogo" className={classes.buttonOthers}*/}
+              {/*       style={{color:"red"}} onClick={onContentsHeartIcon}*/}
+              {/*  />*/}
+              {/*}*/}
+
+              <div className={classes.comments} />
+              <div className={classes.share}/>
+              <div className={classes.save} />
+                </div>
+              </div>
+
+              {/*<img src="images/contentsImg1.png" alt="instagramlogo" className={classes.buttonOthers2}/>*/}
+              {/*<img src="images/contentsImg2.png" alt="instagramlogo" className={classes.buttonOthers2}/>*/}
+              {/*<img src="images/contentsImg3.png" alt="instagramlogo" className={classes.buttonOthers3}/>*/}
             </Typography>
             <Typography variant="button" display="inline"  style={{cursor:"pointer"}}
-                        className={classes.like} onClick={()=>{console.log(123)}}>
+                        className={classes.likeID} onClick={()=>{console.log(123)}}>
               좋아요 1,732,332개
             </Typography>
             <br/>
             <Typography variant="button" display="inline"  style={{cursor:"pointer"}}
-                        className={classes.like} onClick={()=>{console.log(123)}}>
+                        className={classes.likeID} onClick={()=>{console.log(123)}}>
               ID
             </Typography>
             <Typography variant="button" display="inline"

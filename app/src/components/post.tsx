@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import Icon from 'react-native-vector-icons/SimpleLineIcons';
 
 class Post extends Component {
   render() {
@@ -8,7 +9,7 @@ class Post extends Component {
         <View style={styles.profileHeaderContainer}>
           <View style={styles.profileImage} />
           <View style={styles.profileName}>
-            <Text>Profile Name</Text>
+            <Text style={styles.profileText}>Profile Name</Text>
           </View>
         </View>
 
@@ -18,11 +19,18 @@ class Post extends Component {
 
         <View style={styles.footerContainer}>
           <View style={styles.actionContainer}>
-            <Text>Action Footer</Text>
+            <View style={styles.defaultActions}>
+              <Icon name={'heart'} size={25} style={styles.icon} />
+              <Icon name={'bubble'} size={25} style={styles.icon} />
+              <Icon name={'paper-plane'} size={25} style={styles.icon} />
+            </View>
+            <View style={styles.restActions}>
+              <Icon name={'star'} size={25} />
+            </View>
           </View>
 
           <View style={styles.likesContainer}>
-            <Text>94,091,238 likes</Text>
+            <Text style={styles.likeText}>94,091,238 likes</Text>
           </View>
 
           <View style={styles.postContent}>
@@ -51,7 +59,6 @@ const styles = StyleSheet.create({
     height: 55,
     paddingHorizontal: 5,
     alignItems: 'center',
-    backgroundColor: 'green',
   },
   profileImage: {
     width: 30,
@@ -63,20 +70,38 @@ const styles = StyleSheet.create({
   profileName: {
     marginHorizontal: 5,
   },
+  profileText: {
+    fontWeight: '500',
+  },
   photoContainer: {
     height: 400,
     backgroundColor: 'grey',
   },
   footerContainer: {
-    padding: 15,
+    paddingHorizontal: 15,
+    paddingVertical: 10,
   },
   actionContainer: {
-    height: 35,
-    backgroundColor: 'skyblue',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    height: 30,
+  },
+  defaultActions: {
+    flexDirection: 'row',
+  },
+  restActions: {
+    flexDirection: 'row',
+  },
+  icon: {
+    marginRight: 20,
   },
   likesContainer: {
     justifyContent: 'center',
     height: 35,
+  },
+  likeText: {
+    fontWeight: '500',
   },
   postContent: {
     height: 100,

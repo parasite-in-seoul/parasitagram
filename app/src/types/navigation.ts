@@ -1,5 +1,5 @@
 export type AuthorizedNavigatorParamList = {
-  Main: undefined;
+  Main: MainTabNavigatorParamList;
 };
 
 export type MainTabNavigatorParamList = {

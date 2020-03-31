@@ -18,6 +18,7 @@ const FeedScreen = ({ navigation }: Props) => {
   return (
     <ScrollView>
       <Post />
+      <Post />
 
       <Button
         title="Go to UserScreen"

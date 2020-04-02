@@ -229,13 +229,13 @@ const MainContents = () => {
     like: {
       ...commonProps,
       backgroundPosition: '-275px -269px',
-      animation: '$like-button-animation 0.45s',
+      // animation: '$like-button-animation 0.45s',
       ...commonAnimationProps
     },
     liked: {
       ...commonProps,
       backgroundPosition: '-250px -269px',
-      animation: '$liked-button-animation 0.45s',
+      // animation: '$liked-button-animation 0.45s',
       ...commonAnimationProps
     },
     '@keyframes like-button-animation': commonKeyFramesProps,
@@ -416,8 +416,8 @@ const MainContents = () => {
           </CardContent>
           <CardContent className={classes.commentWrite}>
             <InputBase onChange={changeCommentWriteInput}
-              placeholder={"댓글 달기..."}
-                        style={{color: "#8E8E8E", fontSize: "15px", paddingBottom: "0px"}}
+                       placeholder={"댓글 달기..."} multiline={true}
+                       style={{color: "#8E8E8E", fontSize: "15px", paddingBottom: "0px", width: "95%"}}
            />
             {
               commentWriteInput.length>0 ?

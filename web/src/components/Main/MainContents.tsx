@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useEffect, useRef } from 'react';
+import ShareModal from '../Main/ShareModal';
 import { useDispatch } from 'react-redux';
 import Container from "@material-ui/core/Container";
 import Card from "@material-ui/core/Card";
@@ -342,6 +343,15 @@ const MainContents = () => {
     setCommentWriteInput(e.target.value)
   };
 
+  const [open, setOpen] = React.useState(false)
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
     <>
     <div>
@@ -383,7 +393,8 @@ const MainContents = () => {
               {/*}*/}
 
               <div className={classes.comments} />
-              <div className={classes.share}/>
+              <div className={classes.share} onClick={handleOpen}/>
+              <ShareModal open={open} handleClose={handleClose} />
               <div className={classes.save} />
                 </div>
               </div>

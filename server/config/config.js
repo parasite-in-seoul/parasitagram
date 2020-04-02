@@ -6,7 +6,7 @@ module.exports = {
     "username": "parasite",
     "password": process.env.DB_PASSWORD,
     "database": "parasitagram",
-    "host": "127.0.0.1",
+    "host": "13.209.6.153",
     "dialect": "mysql",
     "operatorsAliases": false
   },

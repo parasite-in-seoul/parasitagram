@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { useEffect, useRef } from 'react';
+// @ts-ignore
+import ShareModal from "../Main/ShareModal";
 import { useDispatch } from 'react-redux';
 import Container from "@material-ui/core/Container";
 import Card from "@material-ui/core/Card";
@@ -150,6 +152,7 @@ const MainContents = () => {
   const [contentsTextSpread, setContentsTextSpread] = useState(false);
   const [contentsHeartIcon, setContentsHeartIcon] = useState(false);
   const [commentWriteInput, setCommentWriteInput] = useState('');
+  const [contentsSaved, setContentsSaved] = useState(false);
 
 
   const useStyles = makeStyles((theme: Theme) => ({
@@ -253,6 +256,11 @@ const MainContents = () => {
       backgroundPosition: '-48px -320px',
       justifySelf: 'right'
     },
+    saved: {
+      ...commonProps,
+      backgroundPosition: '-330px -275px',
+      justifySelf: 'right'
+    },
   }));
 
   const classes = useStyles();
@@ -265,9 +273,6 @@ const MainContents = () => {
     return temp;
   };
 
-  const onContentsHeartIcon = () => {
-    setContentsHeartIcon(!contentsHeartIcon);
-  };
 
 
   function LikeButton({ id, ownerHasLiked }) {
@@ -342,6 +347,15 @@ const MainContents = () => {
     setCommentWriteInput(e.target.value)
   };
 
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
     <>
     <div>
@@ -371,26 +385,18 @@ const MainContents = () => {
               <div className={classes.container}>
                 <div className={classes.iconWrapper}>
               <LikeButton id={123} ownerHasLiked={contentsHeartIcon} />
-              {/*{contentsHeartIcon ?*/}
-              {/*  <img src="images/스크린샷 2020-02-28 오후 7.31.29.png" alt="instagramlogo" className={classes.buttonOthers}*/}
-              {/*       onClick={onContentsHeartIcon}*/}
-              {/*       style={{background:"red"}}*/}
-              {/*  />*/}
-              {/*  :*/}
-              {/*  <img src="images/스크린샷 2020-02-28 오후 7.31.29.png" alt="instagramlogo" className={classes.buttonOthers}*/}
-              {/*       style={{color:"red"}} onClick={onContentsHeartIcon}*/}
-              {/*  />*/}
-              {/*}*/}
 
               <div className={classes.comments} />
-              <div className={classes.share}/>
-              <div className={classes.save} />
+              <div className={classes.share} onClick={handleOpen}/>
+              <ShareModal open={open} handleClose={handleClose} />
+              {/*<div className={classes.save} />*/}
+                  {
+                    contentsSaved ?  <div className={classes.saved} onClick={()=>setContentsSaved(!contentsSaved)}/> :
+                      <div className={classes.save} onClick={()=>setContentsSaved(!contentsSaved)}/>
+                  }
                 </div>
               </div>
 
-              {/*<img src="images/contentsImg1.png" alt="instagramlogo" className={classes.buttonOthers2}/>*/}
-              {/*<img src="images/contentsImg2.png" alt="instagramlogo" className={classes.buttonOthers2}/>*/}
-              {/*<img src="images/contentsImg3.png" alt="instagramlogo" className={classes.buttonOthers3}/>*/}
             </Typography>
             <Typography variant="button" display="inline"  style={{cursor:"pointer"}}
                         className={classes.likeID} onClick={()=>{console.log(123)}}>
